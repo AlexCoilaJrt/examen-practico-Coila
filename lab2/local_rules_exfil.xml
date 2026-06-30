@@ -33,7 +33,7 @@
 <group name="local,data_loss_prevention,">
 
   <!-- Etapa 1: login SSH exitoso fuera de horario laboral -->
-  <rule id="100012" level="3" frequency="1" timeframe="86400">
+  <rule id="100012" level="3">
     <if_sid>5715</if_sid>
     <time>22:00 - 06:00</time>
     <description>Login SSH exitoso fuera de horario laboral desde $(srcip)</description>
@@ -49,7 +49,7 @@
   </rule>
 
   <!-- Etapa 3: correlacion critica = etapa 2 actual + etapa 1 previa, misma IP -->
-  <rule id="100014" level="14" frequency="1" timeframe="3600">
+  <rule id="100014" level="14">
     <if_sid>100013</if_sid>
     <if_matched_sid>100012</if_matched_sid>
     <same_source_ip />

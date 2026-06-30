@@ -1,0 +1,23 @@
+<!--
+  local_rules_ssh.xml
+  Examen Final - Seguridad Informatica - Unidad IV
+  Laboratorio 2 - Tarea 2.1: Regla de fuerza bruta SSH
+  Autor: Alex Coila Jarita
+
+  Logica: la regla base de Wazuh 5716 ("sshd: authentication failed")
+  ya detecta cada fallo individual de autenticacion SSH. Esta regla de
+  correlacion cuenta cuantas veces se dispara 5716 desde la MISMA IP de
+  origen (same_source_ip) dentro de una ventana de 60 segundos. Si
+  ocurren 10 o mas eventos en ese intervalo (frequency="10"
+  timeframe="60"), se considera fuerza bruta y se eleva la severidad a
+  nivel 10.
+-->
+<group name="local,ssh,">
+
+  <rule id="100001" level="10">
+    <if_sid>5763</if_sid>
+    <description>Ataque de fuerza bruta SSH detectado desde $(srcip)</description>
+    <group>authentication_failures,brute_force,</group>
+  </rule>
+
+</group>
