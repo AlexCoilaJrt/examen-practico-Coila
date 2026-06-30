@@ -1,0 +1,354 @@
+{
+  "fecha_analisis": "2026-06-30 22:43:18",
+  "total_peticiones_analizadas": 1000,
+  "escaneo_directorios": [],
+  "codigos_error_por_ip": {
+    "45.33.32.156": {
+      "404": 34,
+      "403": 10,
+      "500": 3
+    },
+    "48.228.22.68": {
+      "500": 5,
+      "404": 4
+    },
+    "147.242.19.45": {
+      "500": 5,
+      "404": 7
+    },
+    "91.240.118.172": {
+      "404": 6,
+      "500": 6
+    },
+    "115.88.85.249": {
+      "500": 8,
+      "404": 5
+    },
+    "183.17.75.31": {
+      "500": 8,
+      "404": 4
+    },
+    "198.98.54.31": {
+      "404": 7,
+      "500": 4
+    },
+    "193.32.162.55": {
+      "500": 14,
+      "400": 4
+    },
+    "4.214.57.107": {
+      "404": 7,
+      "500": 2
+    },
+    "76.245.102.25": {
+      "404": 3,
+      "500": 6
+    },
+    "100.94.189.227": {
+      "404": 5,
+      "500": 1
+    },
+    "78.159.143.216": {
+      "500": 6,
+      "404": 3
+    },
+    "122.153.40.102": {
+      "500": 10,
+      "404": 7
+    },
+    "23.129.64.214": {
+      "500": 7,
+      "404": 3
+    },
+    "121.250.135.24": {
+      "404": 3,
+      "500": 3
+    },
+    "142.166.141.134": {
+      "500": 3,
+      "404": 3
+    },
+    "89.210.135.99": {
+      "404": 10,
+      "500": 8
+    },
+    "69.190.10.87": {
+      "404": 4,
+      "500": 4
+    },
+    "37.205.19.102": {
+      "404": 5,
+      "500": 5
+    },
+    "185.220.101.45": {
+      "500": 7,
+      "404": 6
+    },
+    "106.116.31.216": {
+      "500": 4,
+      "404": 4
+    },
+    "179.50.116.35": {
+      "404": 5,
+      "500": 3
+    },
+    "21.242.59.79": {
+      "404": 5,
+      "500": 4
+    },
+    "134.214.243.147": {
+      "404": 1,
+      "500": 6
+    },
+    "68.115.137.145": {
+      "500": 5,
+      "404": 4
+    },
+    "50.64.21.109": {
+      "404": 1,
+      "500": 3
+    },
+    "211.75.132.82": {
+      "404": 6,
+      "500": 6
+    },
+    "207.34.44.100": {
+      "500": 4,
+      "404": 4
+    },
+    "85.121.25.191": {
+      "404": 6,
+      "500": 3
+    },
+    "145.51.146.223": {
+      "404": 2,
+      "500": 2
+    }
+  },
+  "intentos_sql_injection": [
+    {
+      "ip": "193.32.162.55",
+      "url": "/login?user=admin'--&pass=x",
+      "patrones": [
+        "--",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:30:16+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/data?filter=1 OR 1=1",
+      "patrones": [
+        "OR 1=1"
+      ],
+      "timestamp": "2024-06-14T05:32:56+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/login?user=admin'--&pass=x",
+      "patrones": [
+        "--",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:31:04+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/products?cat=1; SELECT * FROM users--",
+      "patrones": [
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:30:24+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/search?q=' OR 1=1--",
+      "patrones": [
+        "--",
+        "OR 1=1",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:30:56+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/v1/users?id=1 UNION SELECT username,password FROM users--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:30:48+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/search?q=' OR 1=1--",
+      "patrones": [
+        "--",
+        "OR 1=1",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:30:08+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/item?id=1 UNION SELECT null,table_name FROM information_schema.tables--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:30:40+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/products?cat=1; SELECT * FROM users--",
+      "patrones": [
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:32:48+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/v1/users?id=1 UNION SELECT username,password FROM users--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:32:24+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/products?cat=1; SELECT * FROM users--",
+      "patrones": [
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:31:12+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/search?q=' OR 1=1--",
+      "patrones": [
+        "--",
+        "OR 1=1",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:31:44+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/data?filter=1 OR 1=1",
+      "patrones": [
+        "OR 1=1"
+      ],
+      "timestamp": "2024-06-14T05:31:20+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/products?cat=1; SELECT * FROM users--",
+      "patrones": [
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:32:00+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/login?user=admin'--&pass=x",
+      "patrones": [
+        "--",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:32:40+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/login?user=admin'--&pass=x",
+      "patrones": [
+        "--",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:31:52+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/data?filter=1 OR 1=1",
+      "patrones": [
+        "OR 1=1"
+      ],
+      "timestamp": "2024-06-14T05:32:08+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/data?filter=1 OR 1=1",
+      "patrones": [
+        "OR 1=1"
+      ],
+      "timestamp": "2024-06-14T05:30:32+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/item?id=1 UNION SELECT null,table_name FROM information_schema.tables--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:32:16+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/item?id=1 UNION SELECT null,table_name FROM information_schema.tables--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:31:28+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/search?q=' OR 1=1--",
+      "patrones": [
+        "--",
+        "OR 1=1",
+        "'"
+      ],
+      "timestamp": "2024-06-14T05:32:32+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/item?id=1 UNION SELECT null,table_name FROM information_schema.tables--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:33:04+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/v1/users?id=1 UNION SELECT username,password FROM users--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:31:36+00:00"
+    },
+    {
+      "ip": "193.32.162.55",
+      "url": "/api/v1/users?id=1 UNION SELECT username,password FROM users--",
+      "patrones": [
+        "UNION",
+        "SELECT",
+        "--"
+      ],
+      "timestamp": "2024-06-14T05:30:00+00:00"
+    }
+  ]
+}
