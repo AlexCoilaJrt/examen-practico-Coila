@@ -1,0 +1,60 @@
+<!--
+  local_rules_exfil.xml
+  Examen Final - Seguridad Informatica - Unidad IV
+  Laboratorio 2 - Tarea 2.2: Regla compuesta de exfiltracion de datos
+  Autor: Alex Coila Jarita
+
+  Logica de la regla (correlacion en dos etapas):
+
+  1) Regla 100012 (nivel bajo, "oculta" en la practica porque solo sirve
+     como bloque de construccion): se dispara cuando un login SSH exitoso
+     (sid base 5715 del ruleset de Wazuh, "sshd: authentication success")
+     ocurre dentro del rango horario 22:00-06:00, es decir, fuera del
+     horario laboral. Queda registrada en el grupo "off_hours_access".
+
+  2) Regla 100013 (nivel bajo): se dispara cuando el log de trafico
+     saliente reporta un campo bytes_sent cuyo valor decimal es mayor o
+     igual a 500.000.000 (500 MB). El patron pcre2 acepta numeros de 9
+     cifras que comienzan en 5-9 (500000000-999999999) o de 10+ cifras.
+     IMPORTANTE: <if_sid>530</if_sid> es un marcador de ejemplo; debe
+     reemplazarse por el sid real del decoder/regla que procesa los logs
+     de trafico saliente del firewall/proxy en el entorno del estudiante.
+
+  3) Regla 100014 (nivel 14, CRITICA): es la regla de correlacion final.
+     Se dispara cuando, dentro de la MISMA hora (timeframe="3600"), desde
+     la MISMA IP de origen (same_source_ip), ocurre un evento que coincide
+     con la regla 100013 (transferencia >500MB, evaluada con <if_sid> sobre
+     el evento actual) Y ademas existe un evento previo que coincidio con
+     la regla 100012 (login exitoso fuera de horario, evaluado con
+     <if_matched_sid> sobre el historial de correlacion). Esta combinacion
+     modela el escenario real de exfiltracion: alguien entra fuera de
+     horario laboral y, poco despues, saca una gran cantidad de datos.
+-->
+<group name="local,data_loss_prevention,">
+
+  <!-- Etapa 1: login SSH exitoso fuera de horario laboral -->
+  <rule id="100012" level="3" frequency="1" timeframe="86400">
+    <if_sid>5715</if_sid>
+    <time>22:00 - 06:00</time>
+    <description>Login SSH exitoso fuera de horario laboral desde $(srcip)</description>
+    <group>off_hours_access,</group>
+  </rule>
+
+  <!-- Etapa 2: transferencia de datos saliente superior a 500 MB -->
+  <rule id="100013" level="3">
+    <if_sid>530</if_sid> <!-- reemplazar por el sid real del origen de logs de trafico saliente -->
+    <field name="bytes_sent" type="pcre2">^([5-9]\d{8}|\d{10,})$</field>
+    <description>Transferencia de datos saliente superior a 500 MB detectada desde $(srcip)</description>
+    <group>data_transfer,large_upload,</group>
+  </rule>
+
+  <!-- Etapa 3: correlacion critica = etapa 2 actual + etapa 1 previa, misma IP -->
+  <rule id="100014" level="14" frequency="1" timeframe="3600">
+    <if_sid>100013</if_sid>
+    <if_matched_sid>100012</if_matched_sid>
+    <same_source_ip />
+    <description>Posible exfiltracion de datos: transferencia >500MB desde $(srcip) tras un login exitoso fuera de horario laboral</description>
+    <group>data_leak,exfiltration,</group>
+  </rule>
+
+</group>
